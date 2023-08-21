@@ -1,5 +1,9 @@
 
 using Livraria.Context.Data;
+using Livraria.Repository.Interfaces;
+using Livraria.Repository.Repositories;
+using Livraria.Service.Interfaces;
+using Livraria.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +14,9 @@ builder.Services.AddDbContext<BookStoreContext>(options =>
                         .GetConnectionString("DefaultConnection"), 
                         b => 
                         b.MigrationsAssembly("Livraria.Web.API")));
+
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
     
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

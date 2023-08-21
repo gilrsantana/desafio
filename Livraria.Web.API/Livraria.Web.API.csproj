@@ -19,6 +19,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Livraria.Context\Livraria.Context.csproj" />
     <ProjectReference Include="..\Livraria.Domain\Livraria.Domain.csproj" />
+    <ProjectReference Include="..\Livraria.Repository\Livraria.Repository.csproj" />
+    <ProjectReference Include="..\Livraria.Service\Livraria.Service.csproj" />
     <ProjectReference Include="..\Livraria.Shared\Livraria.Shared.csproj" />
   </ItemGroup>
 
