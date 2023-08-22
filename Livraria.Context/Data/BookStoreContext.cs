@@ -12,8 +12,8 @@ public class BookStoreContext : DbContext
     public DbSet<Author> Authors { get; set; } = null!;
     public DbSet<Publisher> Publishers { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
-    public DbSet<Fine> Fines { get; set; } = null!;
     public DbSet<Loan> Loans { get; set; } = null!;
+    public DbSet<Fine> Fines { get; set; } = null!;
 
     public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options)
     {
@@ -22,10 +22,10 @@ public class BookStoreContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new UserMap());
-        modelBuilder.ApplyConfiguration(new PublisherMap());
-        modelBuilder.ApplyConfiguration(new AuthorMap());
         modelBuilder.ApplyConfiguration(new BookMap());
+        modelBuilder.ApplyConfiguration(new AuthorMap());
+        modelBuilder.ApplyConfiguration(new PublisherMap());
+        modelBuilder.ApplyConfiguration(new UserMap());
         modelBuilder.ApplyConfiguration(new LoanMap());
         modelBuilder.ApplyConfiguration(new FineMap());
     }

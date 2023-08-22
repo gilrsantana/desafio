@@ -1,53 +1,61 @@
-﻿using Livraria.Domain.Entities;
+﻿using AutoMapper;
+using Livraria.Domain.Entities;
 using Livraria.Service.Interfaces;
+using Livraria.Web.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace Livraria.Web.API.Controllers;
 
-namespace Livraria.Web.API.Controllers
+[Route("bookstore/[controller]")]
+[ApiController]
+public class AuthorController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthorController : ControllerBase
+    private readonly IAuthorService _authorService;
+    private readonly IMapper _mapper;
+    public AuthorController(IAuthorService authorService, IMapper mapper)
     {
-        private readonly IAuthorService _authorService;
-        public AuthorController(IAuthorService authorService)
-        {
-            _authorService = authorService;
-        }
-        // GET: api/<AuthorController>
-        [HttpGet]
-        public IActionResult GetAllAuthorsAsync(int skip=0, int take=25)
-        {
-            var authors = _authorService.GetAllAuthorsAsync(skip, take);
-            return authors == null ? NotFound() : Ok(authors);
-        }
+        _authorService = authorService;
+        _mapper = mapper;
+    }
 
-        // GET api/<AuthorController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAllAuthorsAsync(int skip = 0, int take = 25)
+    {
+        var authors = await _authorService.GetAllAuthorsAsync(skip, take);
+        var authorsVM = _mapper.Map<List<Author>, List<AuthorViewModel>>(authors.ToList());
+        return authorsVM == null ? NotFound() : Ok(authorsVM);
+    }
 
-        // POST api/<AuthorController>
-        [HttpPost]
-        public IActionResult AddAuthorAsync(Author author)
-        {
-            var result = _authorService.InsertAuthorAsync(author);
-            return result ? Ok() : BadRequest();
-        }
 
-        // PUT api/<AuthorController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAuthorByIdAsync(Guid id)
+    {
+        var author = await _authorService.GetAuthorByIdAsync(id);
+        if (author == null)
+            return NotFound();
+        var authorVM = _mapper.Map<Author, AuthorViewModel>(author);
+        return authorVM == null ? NotFound() : Ok(authorVM);
+    }
 
-        // DELETE api/<AuthorController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
+    [HttpPost]
+    public async Task<IActionResult> AddAuthorAsync([FromBody] AuthorViewModel authorVM)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        var authorEntity = _mapper.Map<AuthorViewModel, Author>(authorVM);
+        var result = await _authorService.InsertAuthorAsync(authorEntity);
+        return result != null && result == true ? Ok("Author added successfully!") : BadRequest("Error while adding author!");
+    }
+
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAuthorAsync(Guid id, [FromBody] AuthorViewModel authorVM)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        var authorEntity = _mapper.Map<AuthorViewModel, Author>(authorVM);
+        var result = await _authorService.UpdateAuthorAsync(id, authorEntity);
+        return result != null && result == true ? Ok("Author added successfully!") : BadRequest("Error while adding author!");
     }
 }

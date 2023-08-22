@@ -17,19 +17,20 @@ public class AuthorService : IAuthorService
         return await _authorRepository.GetAllAuthorsAsync(skip, take);
     }
 
-    public Author? GetAuthorByIdAsync(Guid id)
+    public async Task<Author?> GetAuthorByIdAsync(Guid id)
     {
-        return _authorRepository.GetAuthorByIdAsync(id);
+        return await _authorRepository.GetAuthorByIdAsync(id);
     }
 
-    public bool InsertAuthorAsync(Author author)
+    public Task<bool?> InsertAuthorAsync(Author author)
     {
         return _authorRepository.InsertAuthorAsync(author);
     }
 
-    public bool UpdateAuthorAsync(Author author)
+    public async Task<bool?> UpdateAuthorAsync(Guid id, Author author)
     {
-        return _authorRepository.UpdateAuthorAsync(author);
+        author.Id = id;
+        return await _authorRepository.UpdateAuthorAsync(author);
     }
 }
 
