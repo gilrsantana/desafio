@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Livraria.Domain.Entities;
 using Livraria.Web.API.ViewModels;
@@ -13,5 +9,6 @@ public class EntitiesToVMMappingProfile : Profile
     public EntitiesToVMMappingProfile()
     {
         CreateMap<Author, AuthorViewModel>().ReverseMap();
+        CreateMap<Author, AuthorInputModel>().ReverseMap();
     }
 }
