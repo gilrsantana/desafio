@@ -6,12 +6,12 @@ namespace Livraria.Web.API.Controllers.Actions;
 
 [Route("bookstore/[controller]")]
 [ApiController]
-public class UserController : BookStoreControllerBase<UserController>
+public class UserController : BookStoreControllerBase
 {
     private readonly IAuthorService _authorService;
 
-    public UserController(ILogger<UserController> logger, IMapper mapper, IAuthorService authorService) 
-        : base(logger, mapper)
+    public UserController(Serilog.ILogger logger, IMapper mapper, IAuthorService authorService) 
+        : base(logger.ForContext<UserController>(), mapper)
     {
         _authorService = authorService;
     }

@@ -6,15 +6,26 @@ using Livraria.Service.Interfaces;
 using Livraria.Service.Services;
 using Livraria.Web.API.Mappings;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<BookStoreContext>(options =>
-    options.UseSqlServer(builder
-                        .Configuration
-                        .GetConnectionString("DefaultConnection"), 
+    options.UseSqlServer(connectionString, 
                         b => 
                         b.MigrationsAssembly("Livraria.Web.API")));
+
+builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
+    .ReadFrom.Configuration(hostingContext.Configuration)
+       .Enrich.FromLogContext()
+          .WriteTo.MSSqlServer(connectionString, 
+                 sinkOptions: new MSSqlServerSinkOptions
+                 {
+            AutoCreateSqlTable = true,
+            TableName = "Logs"
+        }));
 
 builder.Services.AddAutoMapper(typeof(EntitiesToVMMappingProfile));
 

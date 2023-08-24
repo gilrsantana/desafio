@@ -17,6 +17,8 @@ public class AuthorRepository : IAuthorRepository
     public async Task<IList<Author>> GetAllAuthorsAsync(int skip = 0, int take = 25)
     {
         return await _context.Authors
+            .OrderBy(a => a.Name.FirstName)
+            .ThenBy(a => a.Name.LastName)
             .Skip(skip)
             .Take(take)
             .ToListAsync();
