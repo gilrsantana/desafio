@@ -1,22 +1,24 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Collections;
+using AutoMapper;
 using Livraria.Domain.Entities;
 using Livraria.Service.Interfaces;
 using Livraria.Web.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Livraria.Web.API.Controllers;
+namespace Livraria.Web.API.Controllers.Actions;
 
 [Route("bookstore/[controller]")]
 [ApiController]
-public class AuthorController : ControllerBase
+public class AuthorController : BookStoreControllerBase<AuthorController>
 {
     private readonly IAuthorService _authorService;
-    private readonly IMapper _mapper;
-    public AuthorController(IAuthorService authorService, IMapper mapper)
+
+    public AuthorController(ILogger<AuthorController> logger, IMapper mapper, IAuthorService authorService) 
+        : base(logger, mapper)
     {
         _authorService = authorService;
-        _mapper = mapper;
     }
 
     [HttpGet]
@@ -25,11 +27,10 @@ public class AuthorController : ControllerBase
         try
         {
             var authors = await _authorService.GetAllAuthorsAsync(skip, take);
-            var authorsVm = _mapper
-                                                        .Map<EnumerableQuery<Author>, EnumerableQuery<AuthorViewModel>>
-                                                        ((EnumerableQuery<Author>)authors
-                                                            .AsQueryable().OrderBy(x => x.Name));
-            return authorsVm == null ? NotFound() : Ok(authorsVm);
+            var authorsVm = _mapper.Map<List<Author>, ICollection<AuthorViewModel>>(authors.ToList());
+            return authorsVm == null 
+                ? NotFound(new ResultViewModel<string>("Author not found")) 
+                : Ok(new ResultViewModel<ICollection<AuthorViewModel>>(authorsVm));
         }
         catch (Exception ex)
         {
@@ -77,8 +78,7 @@ public class AuthorController : ControllerBase
             throw;
         }
     }
-
-
+    
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAuthorAsync(Guid id, [FromBody] AuthorViewModel authorVM)
     {
@@ -86,6 +86,6 @@ public class AuthorController : ControllerBase
             return BadRequest(ModelState);
         var authorEntity = _mapper.Map<AuthorViewModel, Author>(authorVM);
         var result = await _authorService.UpdateAuthorAsync(id, authorEntity);
-        return result != null && result == true ? Ok("Author added successfully!") : BadRequest("Error while adding author!");
+        return result == true ? Ok("Author added successfully!") : BadRequest("Error while adding author!");
     }
 }

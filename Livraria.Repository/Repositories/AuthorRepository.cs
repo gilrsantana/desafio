@@ -14,11 +14,13 @@ public class AuthorRepository : IAuthorRepository
         _context = context;
     }
 
-    public async Task<IList<Author>> GetAllAuthorsAsync(int skip = 0, int take = 25) =>
-        await _context.Authors
+    public async Task<IList<Author>> GetAllAuthorsAsync(int skip = 0, int take = 25)
+    {
+        return await _context.Authors
             .Skip(skip)
             .Take(take)
             .ToListAsync();
+    }
 
     public async Task<Author?> GetAuthorByIdAsync(Guid id) => 
         await _context.Authors

@@ -14,7 +14,10 @@ public class AuthorService : IAuthorService
     }
     public async Task<IList<Author>> GetAllAuthorsAsync(int skip = 0, int take = 25)
     {
-        return await _authorRepository.GetAllAuthorsAsync(skip, take);
+        return (await _authorRepository.GetAllAuthorsAsync(skip, take))
+            .OrderBy(a => a.Name.FirstName)
+            .ThenBy(x => x.Name.LastName)
+            .ToList();
     }
 
     public async Task<Author?> GetAuthorByIdAsync(Guid id)
