@@ -7,7 +7,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <RootNamespace>Livraria.Teste</RootNamespace>
+    <RootNamespace>Livraria.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +31,7 @@
     <ProjectReference Include="..\Livraria.Repository\Livraria.Repository.csproj" />
     <ProjectReference Include="..\Livraria.Service\Livraria.Service.csproj" />
   </ItemGroup>
+
 
 
 </Project>

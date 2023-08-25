@@ -12,20 +12,15 @@ public class AuthorService : IAuthorService
     {
         _authorRepository = authorRepository;
     }
-    public async Task<IList<Author>> GetAllAuthorsAsync(int skip = 0, int take = 25)
-    {
-        return await _authorRepository.GetAllAuthorsAsync(skip, take);
-    }
-
-    public async Task<Author?> GetAuthorByIdAsync(Guid id)
-    {
-        return await _authorRepository.GetAuthorByIdAsync(id);
-    }
-
-    public Task<bool?> InsertAuthorAsync(Author author)
-    {
-        return _authorRepository.InsertAuthorAsync(author);
-    }
+    public async Task<IList<Author>> GetAllAuthorsAsync(int skip = 0, int take = 25) => 
+        await _authorRepository.GetAllAuthorsAsync(skip, take);
+    
+    public async Task<Author?> GetAuthorByIdAsync(Guid id) =>
+        await _authorRepository.GetAuthorByIdAsync(id);
+    
+    public async Task<bool?> InsertAuthorAsync(Author author) =>
+        await _authorRepository.InsertAuthorAsync(author);
+    
 
     public async Task<bool?> UpdateAuthorAsync(Guid id, Author author)
     {

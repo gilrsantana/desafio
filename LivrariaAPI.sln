@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Context", "Livrari
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Shared", "Livraria.Shared\Livraria.Shared.csproj", "{DF7EE102-AB10-45C8-A3FE-5CBB523B91FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livraria.Web.API", "Livraria.Web.API\Livraria.Web.API.csproj", "{8D93AB5E-E13A-45A2-B9BD-B9979CAF5EC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Web.API", "Livraria.Web.API\Livraria.Web.API.csproj", "{8D93AB5E-E13A-45A2-B9BD-B9979CAF5EC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livraria.Repository", "Livraria.Repository\Livraria.Repository.csproj", "{BC8A0FD7-EBD8-4F67-8D16-09C64912C25F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Repository", "Livraria.Repository\Livraria.Repository.csproj", "{BC8A0FD7-EBD8-4F67-8D16-09C64912C25F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livraria.Service", "Livraria.Service\Livraria.Service.csproj", "{63291525-33F3-4746-BF01-1AA0A78416E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Service", "Livraria.Service\Livraria.Service.csproj", "{63291525-33F3-4746-BF01-1AA0A78416E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livraria.Test", "Livraria.Test\Livraria.Test.csproj", "{DB749419-21CE-4ED1-A930-36ACDD3C4270}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{63291525-33F3-4746-BF01-1AA0A78416E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63291525-33F3-4746-BF01-1AA0A78416E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63291525-33F3-4746-BF01-1AA0A78416E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB749419-21CE-4ED1-A930-36ACDD3C4270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB749419-21CE-4ED1-A930-36ACDD3C4270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB749419-21CE-4ED1-A930-36ACDD3C4270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB749419-21CE-4ED1-A930-36ACDD3C4270}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

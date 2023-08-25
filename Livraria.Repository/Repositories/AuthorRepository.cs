@@ -27,8 +27,8 @@ public class AuthorRepository : IAuthorRepository
     public async Task<Author?> GetAuthorByIdAsync(Guid id) => 
         await _context.Authors
             .FirstOrDefaultAsync(a => a.Id == id);
-
-
+    
+    
     public async Task<bool?> InsertAuthorAsync(Author author)
     {
         _context.Authors.Add(author);
