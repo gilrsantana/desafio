@@ -1,5 +1,4 @@
 using Livraria.Domain.Enums;
-using Livraria.Shared.Entities;
 
 namespace Livraria.Domain.ValueObjects;
 

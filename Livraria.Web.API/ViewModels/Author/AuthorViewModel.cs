@@ -1,7 +1,7 @@
 using Livraria.Domain.ValueObjects;
 using System.ComponentModel.DataAnnotations;
 
-namespace Livraria.Web.API.ViewModels;
+namespace Livraria.Web.API.ViewModels.Author;
 
 public class AuthorViewModel
 {

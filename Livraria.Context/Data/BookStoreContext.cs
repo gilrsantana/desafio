@@ -1,8 +1,6 @@
 ﻿using Livraria.Context.Data.Mappings;
 using Livraria.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
 namespace Livraria.Context.Data;
 

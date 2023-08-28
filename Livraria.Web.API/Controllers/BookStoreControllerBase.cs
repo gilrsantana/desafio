@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 
 namespace Livraria.Web.API.Controllers;
 

@@ -34,4 +34,16 @@
 
 
 
+  <ItemGroup>
+    <Compile Remove="Services\Author\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Services\Author\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Services\Author\**" />
+  </ItemGroup>
+
 </Project>
